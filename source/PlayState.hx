@@ -69,6 +69,9 @@ class PlayState extends FlxState
 		addATwo();
 	}
 
+	/**
+	 * Adds a two to a random blank tile. 
+	 */
 	private function addATwo()
 	{
 		var indices = new Array<Int>();
@@ -121,10 +124,9 @@ class PlayState extends FlxState
 			drawBoard();
 		}
 	}
-	
+
 	/**
 	 * Resets the game state, either after a game over or advancing to a new level.
-	 * @param rlev 	The level that the game state is proceeding to. 1 if a reset, >1 otherwise.
 	 */
 	function resetCallback():Void
 	{
@@ -165,6 +167,9 @@ class PlayState extends FlxState
 		addATwo();
 	}
 
+	/**
+	 * Simple callback, where the player signals their intent to continue.
+	 */
 	function continueCallback():Void
 	{
 		gameover = false;
@@ -174,6 +179,9 @@ class PlayState extends FlxState
 		cont.destroy();
 	}
 
+	/**
+	 * Draws the tiles. 
+	 */
 	private function drawBoard()
 	{
 		for (i in 0..._texts.length)
@@ -197,6 +205,9 @@ class PlayState extends FlxState
 		}
 	}
 
+	/**
+	 * Checks for user input.
+	 */
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -204,26 +215,31 @@ class PlayState extends FlxState
 		{
 			if (FlxG.keys.justPressed.W)
 			{
-				slideLeft();
+				slideUp();
 			}
 
 			if (FlxG.keys.justPressed.A)
 			{
-				slideUp();
+				slideLeft();
 			}
 
 			if (FlxG.keys.justPressed.S)
 			{
-				slideRight();
+				slideDown();
 			}
 
 			if (FlxG.keys.justPressed.D)
 			{
-				slideDown();
+				slideRight();
 			}
 		}
 	}
 
+	/**
+	 * Slides and merges the tiles.
+	 * @param list 			The array of which you wish to slide.
+	 * @return Array<Int> 	The slided array.
+	 */
 	private function slide(list:Array<Int>):Array<Int>
 	{
 		for (i in 0...list.length)
@@ -266,8 +282,11 @@ class PlayState extends FlxState
 
 		return list;
 	}
-
-	private function slideUp()
+	
+	/**
+	 * Slides horizontally.
+	 */
+	private function slideLeft()
 	{
 		for (i in 0...4)
 		{
@@ -288,7 +307,10 @@ class PlayState extends FlxState
 		addATwo();
 	}
 
-	private function slideLeft()
+	/**
+	 * Slides vertically.
+	 */
+	private function slideUp()
 	{
 		for (i in 0...4)
 		{
@@ -309,7 +331,10 @@ class PlayState extends FlxState
 		addATwo();
 	}
 
-	private function slideDown()
+	/**
+	 * Slides horizontally, but in reverse to provide the desired effect.
+	 */
+	private function slideRight()
 	{
 		for (i in 0...4)
 		{
@@ -332,7 +357,10 @@ class PlayState extends FlxState
 		addATwo();
 	}
 
-	private function slideRight()
+	/**
+	 * Slides vertically, but in reverse to provide the desired effect.
+	 */
+	private function slideDown()
 	{
 		for (i in 0...4)
 		{
